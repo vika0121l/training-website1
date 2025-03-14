@@ -38,13 +38,13 @@ function Header() {
             Зовнішній вигляд Снігового барса
           </Link>
           <Link to="/nutrition" className={`nav-link text-white ${location.pathname === '/nutrition' ? 'active' : ''}`}>
-            Харчування зайців
+            Харчування Снігових барсів
           </Link>
           <Link to="/population" className={`nav-link text-white ${location.pathname === '/population' ? 'active' : ''}`}>
-            Ареал зайців
+            Ареал Снігових барсів
           </Link>
           <Link to="/photo" className={`nav-link text-white ${location.pathname === '/photo' ? 'active' : ''}`}>
-            Фотографії зайців
+            Фотографії Снігових барсів
           </Link>
         </nav>
 
