@@ -3,11 +3,11 @@ function Morphology() {
     <main className="container px-4 py-4">
       <article>
         <section>
-          <h3 className="h3 text-success">Зовнішній вигляд</h3>
+          <h3 className="h3 text-primary">Зовнішній вигляд</h3>
           <p>Сніговий барс має сіро-біле товсте хутро з численними плямами на голові і шиї.</p>
         </section>
         <section>
-          <h3 className="h3 text-success">Особливості будови</h3>
+          <h3 className="h3 text-primary">Особливості будови</h3>
           <ul>
             <li>Вагою зазвичай від 35 кг до 55 кг, сніговий барс трохи менший в середньому, ніж леопард.</li>
             <li>Довжина голови і тіла становить 99-130 см, висота плеча становить близько 60 см.</li>

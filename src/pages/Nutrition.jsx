@@ -2,7 +2,7 @@ function Nutrition() {
   return (
     <main className="container px-4 py-4 flex-grow-1">
       <section>
-        <h2 className="h2 text-success mb-4">Харчування Снігових барсів</h2>
+        <h2 className="h2 text-primary mb-4">Харчування Снігових барсів</h2>
         <p>Сніговий барс є хижаком, що живе і полює поодинці . Їх раціон включає:</p>
         <ul className="list-group">
           <li className="list-group-item">Основною здобиччю є нахур блакитний.</li>
