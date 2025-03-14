@@ -3,18 +3,18 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 function Photo() {
   const images = [
-    { src: '/images/1200px-haas-in-het-grasjpg.webp', alt: 'Зайці в траві' },
-    { src: '/images/1200px-hasebeioberwerbejpg.webp', alt: 'Зайці в полі' },
-    { src: '/images/european-hare-6121jpg.webp', alt: 'Європейський заєць' },
-    { src: '/images/fFKuESpf7VTCGBNPscig.webp', alt: 'Зайці на лузі' },
-    { src: '/images/halljnes.webp', alt: 'Зайці в лісі' },
-    { src: '/images/zu6YRoYqGYVyExZ54dDT.webp', alt: 'Зайці на лузі' }
+    { src: '/images/1200px-snow-leopard-1985510jpg.webp', alt: 'Сніговий барс та сніг' },
+    { src: '/images/comfortable-snow-leopard-cub.webp', alt: 'Милий Сніговий барс' },
+    { src: '/images/djamila-with-paw-up.webp', alt: 'Сніговий барс та зима' },
+    { src: '/images/okara-sitting-in-the-snow.webp', alt: 'Сніговий барс сидить' },
+    { src: '/images/snow-leopard-family.webp', alt: 'Родина Снігових барсів' },
+    { src: '/images/snow-leopard-playful-8154294490jpg.webp', alt: 'Сніговий барс' }
   ];
 
   return (
     <main className="container px-4 py-4 flex-grow-1">
       <article>
-        <h2 className="h2 text-success mb-4">Фотогалерея зайців</h2>
+        <h2 className="h2 text-success mb-4">Фотогалерея Снігових барсів</h2>
         <div id="carouselExampleIndicators" className="carousel slide" data-bs-ride="carousel">
           <div className="carousel-indicators">
             {images.map((_, index) => (
