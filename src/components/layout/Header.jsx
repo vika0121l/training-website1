@@ -26,7 +26,7 @@ function Header() {
               alt="Сніговий барс" 
               className="site-logo rounded-circle me-2"
             />
-            <span className="fs-4">Сайт про Снігових барсів</span>
+            <span className="fs-6">Сайт про Снігових барсів</span>
           </Link>
         </div>
 
