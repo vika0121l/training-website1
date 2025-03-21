@@ -113,6 +113,10 @@ footer {
   color: #fff;
 }
 
+.alert {
+  background-color: #0d6efd57;
+}
+
 /* Контейнер для пошуку */
 .search-container {
   flex-shrink: 0;
