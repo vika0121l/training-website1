@@ -12,8 +12,8 @@ import mongoose from 'mongoose';
 const { expect } = chai;
 chai.use(chaiHttp);
 
-// Тести API вебдодатку сайту про зайців
-describe('API вебдодатку сайту про зайців', () => {
+// Тести API вебдодатку сайту про Снігових Барсів
+describe('API вебдодатку сайту про Снігових Барсів', () => {
     // Отримуємо екземпляр бази даних з контейнера
     const database = container.get<IDatabase>(TYPES.IDatabase);
     // Створюємо спеціальний URI для тестової бази даних
@@ -53,15 +53,15 @@ describe('API вебдодатку сайту про зайців', () => {
         });
     });
 
-    // Перед кожним тестом очищуємо колекцію зайців
+    // Перед кожним тестом очищуємо колекцію Снігових Барсів
     beforeEach(async () => {
         await Snowleopard.deleteMany({});
     });
 
-    // Тести для створення запису про нового зайця (POST-запит)
+    // Тести для створення запису про нового Снігового Барса (POST-запит)
     describe('POST /api/snowleopards', () => {
-        it('має створити запис про нового зайця', done => {
-            // Тестові дані зайця
+        it('має створити запис про нового Снігового Барса', done => {
+            // Тестові дані Снігового Барса
             const snowleopard = {
                 name: 'Вухань',
                 age: 2,
@@ -69,6 +69,7 @@ describe('API вебдодатку сайту про зайців', () => {
                 weight: 2.5,
                 gender: 'male' as const,
                 description: 'Сірий заєць',
+                huntingAltitude: '3 км',
             };
 
             // Виконуємо POST-запит для створення запису про зайця
@@ -88,6 +89,10 @@ describe('API вебдодатку сайту про зайців', () => {
                     expect(res.body).to.have.property('gender', snowleopard.gender);
                     expect(res.body).to.have.property('description', snowleopard.description);
                     expect(res.body).to.have.property('dateAdded');
+                    expect(res.body).to.have.property(
+                        'huntingAltitude',
+                        snowleopard.huntingAltitude,
+                    );
                     expect(new Date(res.body.dateAdded)).to.be.instanceOf(Date);
                     done();
                 });
@@ -105,6 +110,7 @@ describe('API вебдодатку сайту про зайців', () => {
                 weight: 3.2,
                 gender: 'male',
                 description: 'Білий заєць',
+                huntingAltitude: '3 км',
             });
             await testSnowleopard.save();
 
@@ -117,6 +123,7 @@ describe('API вебдодатку сайту про зайців', () => {
             expect(res.body[0]).to.have.property('gender', 'male');
             expect(res.body[0]).to.have.property('description', 'Білий заєць');
             expect(res.body[0]).to.have.property('dateAdded');
+            expect(res.body[0]).to.have.property('huntingAltitude', '3 км');
             expect(new Date(res.body[0].dateAdded)).to.be.instanceOf(Date);
         });
     });
@@ -132,6 +139,7 @@ describe('API вебдодатку сайту про зайців', () => {
                 weight: 1.8,
                 gender: 'male',
                 description: 'Коричневий заєць',
+                huntingAltitude: '3 км',
             });
             const savedSnowleopard = await testSnowleopard.save();
 
@@ -146,6 +154,7 @@ describe('API вебдодатку сайту про зайців', () => {
             expect(res.body).to.have.property('weight', 1.8);
             expect(res.body).to.have.property('gender', 'male');
             expect(res.body).to.have.property('description', 'Коричневий заєць');
+            expect(res.body).to.have.property('huntingAltitude', '3 км');
         });
 
         it('має повернути 404 для неіснуючого зайця', async () => {
@@ -166,6 +175,7 @@ describe('API вебдодатку сайту про зайців', () => {
                 weight: 1.8,
                 gender: 'male',
                 description: 'Початковий опис',
+                huntingAltitude: '3 км',
             });
             const savedSnowleopard = await testSnowleopard.save();
 
@@ -177,6 +187,7 @@ describe('API вебдодатку сайту про зайців', () => {
                 weight: 2.5,
                 gender: 'female',
                 description: 'Оновлений опис',
+                huntingAltitude: '3 км',
             };
 
             // Виконуємо PUT-запит для повного оновлення запису про зайця
@@ -194,6 +205,7 @@ describe('API вебдодатку сайту про зайців', () => {
             expect(res.body).to.have.property('gender', 'female');
             expect(res.body).to.have.property('description', 'Оновлений опис');
             expect(res.body).to.have.property('dateAdded');
+            expect(res.body).to.have.property(' huntingAltitude', '3 км');
             expect(new Date(res.body.dateAdded)).to.be.instanceOf(Date);
         });
 
@@ -206,6 +218,7 @@ describe('API вебдодатку сайту про зайців', () => {
                 weight: 1.8,
                 gender: 'male',
                 description: 'Початковий опис',
+                huntingAltitude: '3 км',
             });
             const savedSnowleopard = await testSnowleopard.save();
 
@@ -216,6 +229,7 @@ describe('API вебдодатку сайту про зайців', () => {
                 // height і weight відсутні
                 gender: 'female',
                 description: 'Оновлений опис',
+                huntingAltitude: '3 км',
             };
 
             // Виконуємо PUT-запит з неповними даними
@@ -232,6 +246,7 @@ describe('API вебдодатку сайту про зайців', () => {
             expect(unchangedSnowleopard).to.have.property('name', 'Оригінальний');
             expect(unchangedSnowleopard).to.have.property('height', 25);
             expect(unchangedSnowleopard).to.have.property('weight', 1.8);
+            expect(unchangedSnowleopard).to.have.property('huntingAltitude', '3 км');
         });
     });
 
@@ -246,6 +261,7 @@ describe('API вебдодатку сайту про зайців', () => {
                 weight: 1.8,
                 gender: 'male',
                 description: 'Початковий опис',
+                untingAltitude: '3 км',
             });
             const savedSnowleopard = await testSnowleopard.save();
 
@@ -253,7 +269,8 @@ describe('API вебдодатку сайту про зайців', () => {
             const patchData = {
                 name: 'Частково оновлений',
                 age: 3,
-                description: 'Оновлений опис',
+                description: 'Оновлений опис',\
+                untingAltitude: '3 км',
             };
 
             // Виконуємо PATCH-запит
@@ -271,6 +288,7 @@ describe('API вебдодатку сайту про зайців', () => {
             expect(res.body).to.have.property('gender', 'male');
             expect(res.body).to.have.property('description', 'Оновлений опис');
             expect(res.body).to.have.property('dateAdded');
+            expect(res.body).to.have.property('huntingAltitude', '3 км');
             expect(new Date(res.body.dateAdded)).to.be.instanceOf(Date);
         });
 
@@ -283,6 +301,7 @@ describe('API вебдодатку сайту про зайців', () => {
                 weight: 1.8,
                 gender: 'male',
                 description: 'Початковий опис',
+                untingAltitude: '3 км',
             });
             const savedSnowleopard = await testSnowleopard.save();
 
@@ -293,6 +312,7 @@ describe('API вебдодатку сайту про зайців', () => {
                 // height і weight навмисно відсутні
                 gender: 'female',
                 description: 'Оновлений опис',
+                untingAltitude: '3 км',
             };
 
             // Виконуємо PATCH-запит
@@ -310,6 +330,7 @@ describe('API вебдодатку сайту про зайців', () => {
             expect(res.body).to.have.property('weight', 1.8);
             expect(res.body).to.have.property('gender', 'female');
             expect(res.body).to.have.property('description', 'Оновлений опис');
+            expect(res.body).to.have.property('untingAltitude', '3 км');
         });
     });
 
@@ -350,6 +371,7 @@ describe('API вебдодатку сайту про зайців', () => {
                 weight: 2.1,
                 gender: 'female',
                 description: 'Чорний заєць',
+                untingAltitude: '3 км',
             });
             const savedSnowleopard = await testSnowleopard.save();
 

@@ -9,6 +9,7 @@ interface ISnowleopard {
     gender: 'male' | 'female'; // Стать зайця: 'male' - самець, 'female' - самка
     description?: string; // Опис зайця (необов'язкове поле)
     dateAdded: Date; // Дата додавання запису до бази даних
+    huntingAltitude: string; //висота території полювання над рівнем моря, км.
 }
 
 // Схема MongoDB для моделі "Заєць"
@@ -38,6 +39,10 @@ const snowleopardSchema = new Schema<ISnowleopard>({
     dateAdded: {
         type: Date,
         default: Date.now, // Значення за замовчуванням - поточна дата і час
+    },
+    huntingAltitude: {
+        type: String,
+        required: true, // Поле є обов'язковим
     },
 });
 
