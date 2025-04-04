@@ -13,14 +13,14 @@ API реалізовано за допомогою вебфреймворку Ex
 
 ## API endpoints
 
-- `GET /api/rabbits` - отримати список всіх записів зайців
-- `GET /api/rabbits/:id` - отримати дані про зайця за ID
-- `POST /api/rabbits` - створити новий запис зайця
-- `PUT /api/rabbits/:id` - повністю оновити запис зайця за ID
-- `PATCH /api/rabbits/:id` - частково оновити запис зайця за ID
-- `DELETE /api/rabbits/:id` - видалити дані про зайця за ID
-- `HEAD /api/rabbits` - отримати метадані списку зайців
-- `OPTIONS /api/rabbits` - отримати список доступних HTTP методів
+- `GET /api/snowleopards` - отримати список всіх записів зайців
+- `GET /api/snowleopards/:id` - отримати дані про зайця за ID
+- `POST /api/snowleopards` - створити новий запис зайця
+- `PUT /api/snowleopards/:id` - повністю оновити запис зайця за ID
+- `PATCH /api/snowleopards/:id` - частково оновити запис зайця за ID
+- `DELETE /api/snowleopards/:id` - видалити дані про зайця за ID
+- `HEAD /api/snowleopards` - отримати метадані списку зайців
+- `OPTIONS /api/snowleopards` - отримати список доступних HTTP методів
 
 ## Початок роботи
 

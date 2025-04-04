@@ -1,18 +1,18 @@
 import { Router, Request, Response } from 'express';
 import { container } from '../config/container';
-import { RabbitRepository } from '../repositories/RabbitRepository';
+import { SnowleopardRepository } from '../repositories/SnowleopardRepository';
 
 // Створюємо новий роутер Express
 const router = Router();
 // Отримуємо екземпляр репозиторію зайців з контейнера інверсії залежностей
-const rabbitRepository = container.get(RabbitRepository);
+const snowleopardRepository = container.get(SnowleopardRepository);
 
 // Роутер для HTTP метода GET / - отримання всіх записів зайців
 router.get('/', (async (_req: Request, res: Response) => {
     try {
         // Отримуємо всі записи зайців з бази даних через репозиторій
-        const rabbits = await rabbitRepository.findAll();
-        res.json(rabbits);
+        const snowleopards = await snowleopardRepository.findAll();
+        res.json(snowleopards);
     } catch (error) {
         // Обробка помилки
         const errorMessage = error instanceof Error ? error.message : 'Виникла невідома помилка';
@@ -24,9 +24,9 @@ router.get('/', (async (_req: Request, res: Response) => {
 router.get('/:id', (async (req: Request, res: Response) => {
     try {
         // Пошук зайця за ідентифікатором
-        const rabbit = await rabbitRepository.findById(req.params.id);
-        if (rabbit) {
-            res.json(rabbit);
+        const snowleopard = await snowleopardRepository.findById(req.params.id);
+        if (snowleopard) {
+            res.json(snowleopard);
         } else {
             // Якщо заєць не знайдений, повертаємо 404 помилку
             res.status(404).json({ message: 'Запис зайця не знайдено' });
@@ -42,9 +42,9 @@ router.get('/:id', (async (req: Request, res: Response) => {
 router.post('/', (async (req: Request, res: Response) => {
     try {
         // Створюємо новий запис зайця з даних запиту
-        const newRabbit = await rabbitRepository.create(req.body);
+        const newSnowleopard = await snowleopardRepository.create(req.body);
         // Повертаємо статус 201 (Created) і дані створеного зайця
-        res.status(201).json(newRabbit);
+        res.status(201).json(newSnowleopard);
     } catch (error) {
         // Обробка помилки
         const errorMessage = error instanceof Error ? error.message : 'Виникла невідома помилка';
@@ -67,9 +67,9 @@ router.put('/:id', (async (req: Request, res: Response) => {
         }
 
         // Оновлюємо зайця з вказаним ID
-        const rabbit = await rabbitRepository.update(req.params.id, req.body);
-        if (rabbit) {
-            return res.json(rabbit);
+        const snowleopard = await snowleopardRepository.update(req.params.id, req.body);
+        if (snowleopard) {
+            return res.json(snowleopard);
         } else {
             // Якщо заєць не знайдений, повертаємо 404 помилку
             return res.status(404).json({ message: 'Запис зайця не знайдено' });
@@ -85,9 +85,9 @@ router.put('/:id', (async (req: Request, res: Response) => {
 router.patch('/:id', (async (req: Request, res: Response) => {
     try {
         // Часткове оновлення запису зайця - передаються лише ті поля, які потрібно змінити
-        const rabbit = await rabbitRepository.patch(req.params.id, req.body);
-        if (rabbit) {
-            res.json(rabbit);
+        const snowleopard = await snowleopardRepository.patch(req.params.id, req.body);
+        if (snowleopard) {
+            res.json(snowleopard);
         } else {
             // Якщо заєць не знайдений, повертаємо 404 помилку
             res.status(404).json({ message: 'Запис зайця не знайдено' });
@@ -103,8 +103,8 @@ router.patch('/:id', (async (req: Request, res: Response) => {
 router.delete('/:id', (async (req: Request, res: Response) => {
     try {
         // Видаляємо дані про зайця за ID
-        const rabbit = await rabbitRepository.delete(req.params.id);
-        if (rabbit) {
+        const snowleopard = await snowleopardRepository.delete(req.params.id);
+        if (snowleopard) {
             // У разі успіху повертаємо повідомлення про видалення
             res.json({ message: 'Запис про зайця видалено' });
         } else {

@@ -20,7 +20,7 @@ export const swaggerSpec = {
     ],
     // Визначення роутерів API та операцій з ними
     paths: {
-        '/api/rabbits': {
+        '/api/snowleopards': {
             // GET запит для отримання всіх зайців
             get: {
                 summary: 'Отримати всіх зайців',
@@ -31,7 +31,7 @@ export const swaggerSpec = {
                             'application/json': {
                                 schema: {
                                     type: 'array',
-                                    items: { $ref: '#/components/schemas/Rabbit' },
+                                    items: { $ref: '#/components/schemas/Snowleopard' },
                                 },
                             },
                         },
@@ -46,7 +46,7 @@ export const swaggerSpec = {
                     required: true,
                     content: {
                         'application/json': {
-                            schema: { $ref: '#/components/schemas/Rabbit' },
+                            schema: { $ref: '#/components/schemas/Snowleopard' },
                         },
                     },
                 },
@@ -55,7 +55,7 @@ export const swaggerSpec = {
                         description: "Створений об'єкт зайця",
                         content: {
                             'application/json': {
-                                schema: { $ref: '#/components/schemas/Rabbit' },
+                                schema: { $ref: '#/components/schemas/Snowleopard' },
                             },
                         },
                     },
@@ -64,7 +64,7 @@ export const swaggerSpec = {
         },
 
         // Операції для конкретного зайця за ID
-        '/api/rabbits/{id}': {
+        '/api/snowleopards/{id}': {
             // GET запит для отримання зайця за ID
             get: {
                 summary: 'Отримати зайця за ID',
@@ -82,7 +82,7 @@ export const swaggerSpec = {
                         description: "Об'єкт зайця",
                         content: {
                             'application/json': {
-                                schema: { $ref: '#/components/schemas/Rabbit' },
+                                schema: { $ref: '#/components/schemas/Snowleopard' },
                             },
                         },
                     },
@@ -106,7 +106,7 @@ export const swaggerSpec = {
                     required: true,
                     content: {
                         'application/json': {
-                            schema: { $ref: '#/components/schemas/Rabbit' },
+                            schema: { $ref: '#/components/schemas/Snowleopard' },
                         },
                     },
                 },
@@ -115,7 +115,7 @@ export const swaggerSpec = {
                         description: "Оновлений об'єкт зайця",
                         content: {
                             'application/json': {
-                                schema: { $ref: '#/components/schemas/Rabbit' },
+                                schema: { $ref: '#/components/schemas/Snowleopard' },
                             },
                         },
                     },
@@ -138,7 +138,7 @@ export const swaggerSpec = {
                     required: true,
                     content: {
                         'application/json': {
-                            schema: { $ref: '#/components/schemas/Rabbit' },
+                            schema: { $ref: '#/components/schemas/Snowleopard' },
                         },
                     },
                 },
@@ -147,7 +147,7 @@ export const swaggerSpec = {
                         description: "Оновлений об'єкт зайця",
                         content: {
                             'application/json': {
-                                schema: { $ref: '#/components/schemas/Rabbit' },
+                                schema: { $ref: '#/components/schemas/Snowleopard' },
                             },
                         },
                     },
@@ -179,7 +179,7 @@ export const swaggerSpec = {
         // Схеми даних
         schemas: {
             // Схема об'єкта Заєць
-            Rabbit: {
+            Snowleopard: {
                 type: 'object',
                 required: ['name', 'age', 'height', 'weight', 'gender'],
                 properties: {

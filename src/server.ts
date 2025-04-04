@@ -30,8 +30,8 @@ const database = container.get<IDatabase>(TYPES.IDatabase);
 const appConfig = container.get<IConfig>('Config');
 
 // Підключаємо роутери до API
-import rabbitRoutes from './routes/rabbits';
-app.use('/api/rabbits', rabbitRoutes);
+import snowleopardRoutes from './routes/snowleopard';
+app.use('/api/snowleopards', snowleopardRoutes);
 
 // Отримуємо порт з конфігурації
 const PORT = config.PORT;
