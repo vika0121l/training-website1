@@ -187,7 +187,7 @@ describe('API вебдодатку сайту про Снігових Барсі
                 weight: 2.5,
                 gender: 'female',
                 description: 'Оновлений опис',
-                huntingAltitude: '3 км',
+                huntingAltitude: '4 км',
             };
 
             // Виконуємо PUT-запит для повного оновлення запису про зайця
@@ -205,7 +205,7 @@ describe('API вебдодатку сайту про Снігових Барсі
             expect(res.body).to.have.property('gender', 'female');
             expect(res.body).to.have.property('description', 'Оновлений опис');
             expect(res.body).to.have.property('dateAdded');
-            expect(res.body).to.have.property(' huntingAltitude', '3 км');
+            expect(res.body).to.have.property('huntingAltitude', '4 км');
             expect(new Date(res.body.dateAdded)).to.be.instanceOf(Date);
         });
 
@@ -261,7 +261,7 @@ describe('API вебдодатку сайту про Снігових Барсі
                 weight: 1.8,
                 gender: 'male',
                 description: 'Початковий опис',
-                untingAltitude: '3 км',
+                huntingAltitude: '3 км',
             });
             const savedSnowleopard = await testSnowleopard.save();
 
@@ -269,8 +269,8 @@ describe('API вебдодатку сайту про Снігових Барсі
             const patchData = {
                 name: 'Частково оновлений',
                 age: 3,
-                description: 'Оновлений опис',\
-                untingAltitude: '3 км',
+                description: 'Оновлений опис',
+                huntingAltitude: '4 км',
             };
 
             // Виконуємо PATCH-запит
@@ -288,7 +288,7 @@ describe('API вебдодатку сайту про Снігових Барсі
             expect(res.body).to.have.property('gender', 'male');
             expect(res.body).to.have.property('description', 'Оновлений опис');
             expect(res.body).to.have.property('dateAdded');
-            expect(res.body).to.have.property('huntingAltitude', '3 км');
+            expect(res.body).to.have.property('huntingAltitude', '4 км');
             expect(new Date(res.body.dateAdded)).to.be.instanceOf(Date);
         });
 
@@ -301,7 +301,7 @@ describe('API вебдодатку сайту про Снігових Барсі
                 weight: 1.8,
                 gender: 'male',
                 description: 'Початковий опис',
-                untingAltitude: '3 км',
+                huntingAltitude: '3 км',
             });
             const savedSnowleopard = await testSnowleopard.save();
 
@@ -312,7 +312,7 @@ describe('API вебдодатку сайту про Снігових Барсі
                 // height і weight навмисно відсутні
                 gender: 'female',
                 description: 'Оновлений опис',
-                untingAltitude: '3 км',
+                huntingAltitude: '3 км',
             };
 
             // Виконуємо PATCH-запит
@@ -330,7 +330,7 @@ describe('API вебдодатку сайту про Снігових Барсі
             expect(res.body).to.have.property('weight', 1.8);
             expect(res.body).to.have.property('gender', 'female');
             expect(res.body).to.have.property('description', 'Оновлений опис');
-            expect(res.body).to.have.property('untingAltitude', '3 км');
+            expect(res.body).to.have.property('huntingAltitude', '3 км');
         });
     });
 
@@ -371,7 +371,7 @@ describe('API вебдодатку сайту про Снігових Барсі
                 weight: 2.1,
                 gender: 'female',
                 description: 'Чорний заєць',
-                untingAltitude: '3 км',
+                huntingAltitude: '3 км',
             });
             const savedSnowleopard = await testSnowleopard.save();
 
