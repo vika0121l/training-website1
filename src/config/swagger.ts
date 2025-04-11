@@ -208,6 +208,10 @@ export const swaggerSpec = {
                         type: 'string',
                         description: "Опис зайця (необов'язкове поле)",
                     },
+                    huntingAltitude: {
+                        type: 'string',
+                        huntingAltitude: 'Висота території полювання над рівнем моря, км.',
+                    },
                 },
             },
         },
