@@ -63,16 +63,16 @@ describe('API вебдодатку сайту про Снігових Барсі
         it('має створити запис про нового Снігового Барса', done => {
             // Тестові дані Снігового Барса
             const snowleopard = {
-                name: 'Вухань',
+                name: 'Барс',
                 age: 2,
                 height: 30,
                 weight: 2.5,
                 gender: 'male' as const,
-                description: 'Сірий заєць',
+                description: 'Сніговий Барс',
                 huntingAltitude: '3 км',
             };
 
-            // Виконуємо POST-запит для створення запису про зайця
+            // Виконуємо POST-запит для створення запису про Снігового Барса
             chai.request(app)
                 .post('/api/snowleopards')
                 .send(snowleopard)
@@ -99,75 +99,75 @@ describe('API вебдодатку сайту про Снігових Барсі
         });
     });
 
-    // Тести для отримання всіх записів зайців (GET-запит)
+    // Тести для отримання всіх записів Снігових Барсів (GET-запит)
     describe('GET /api/snowleopards', () => {
-        it('має отримати всіх зайців', async () => {
-            // Створюємо тестовий запис зайця
+        it('має отримати всіх Снігових Барсів', async () => {
+            // Створюємо тестовий запис Снігового Барса
             const testSnowleopard = new Snowleopard({
-                name: 'Білан',
+                name: 'Сніговий Леопард',
                 age: 3,
                 height: 35,
                 weight: 3.2,
                 gender: 'male',
-                description: 'Білий заєць',
+                description: 'Білий Барс',
                 huntingAltitude: '3 км',
             });
             await testSnowleopard.save();
 
-            // Виконуємо GET-запит для отримання всіх записів зайців
+            // Виконуємо GET-запит для отримання всіх записів Снігових Барсів
             const res = await chai.request(app).get('/api/snowleopards');
             expect(res).to.have.status(200);
             expect(res.body).to.be.an('array');
             expect(res.body.length).to.equal(1);
-            expect(res.body[0]).to.have.property('name', 'Білан');
+            expect(res.body[0]).to.have.property('name', 'Сніговий леопард');
             expect(res.body[0]).to.have.property('gender', 'male');
-            expect(res.body[0]).to.have.property('description', 'Білий заєць');
+            expect(res.body[0]).to.have.property('description', 'Білий Барс');
             expect(res.body[0]).to.have.property('dateAdded');
             expect(res.body[0]).to.have.property('huntingAltitude', '3 км');
             expect(new Date(res.body[0].dateAdded)).to.be.instanceOf(Date);
         });
     });
 
-    // Тести для отримання запису конкретного зайця за ID (GET-запит)
+    // Тести для отримання запису конкретного Снігового Барса за ID (GET-запит)
     describe('GET /api/snowleopards/:id', () => {
-        it('має отримати конкретного зайця за id', async () => {
-            // Створюємо запис тестового зайця
+        it('має отримати конкретного Снігового Барса за id', async () => {
+            // Створюємо запис тестового Снігового Барса
             const testSnowleopard = new Snowleopard({
-                name: 'Косий',
+                name: 'Леопард сніжний',
                 age: 1,
                 height: 25,
                 weight: 1.8,
                 gender: 'male',
-                description: 'Коричневий заєць',
+                description: 'Білосніжний Барс',
                 huntingAltitude: '3 км',
             });
             const savedSnowleopard = await testSnowleopard.save();
 
-            // Виконуємо GET-запит для отримання запису зайця за ID
+            // Виконуємо GET-запит для отримання запису Снігового Барса за ID
             const res = await chai
                 .request(app)
                 .get(`/api/snowleopards/${String(savedSnowleopard._id)}`);
             expect(res).to.have.status(200);
-            expect(res.body).to.have.property('name', 'Косий');
+            expect(res.body).to.have.property('name', 'Леопард сніжний');
             expect(res.body).to.have.property('age', 1);
             expect(res.body).to.have.property('height', 25);
             expect(res.body).to.have.property('weight', 1.8);
             expect(res.body).to.have.property('gender', 'male');
-            expect(res.body).to.have.property('description', 'Коричневий заєць');
+            expect(res.body).to.have.property('description', 'Білосніжний Барс');
             expect(res.body).to.have.property('huntingAltitude', '3 км');
         });
 
-        it('має повернути 404 для неіснуючого зайця', async () => {
-            // Виконуємо GET-запит для неіснуючого ID зайця
+        it('має повернути 404 для неіснуючого Снігового Барса', async () => {
+            // Виконуємо GET-запит для неіснуючого ID Снігового Барса
             const res = await chai.request(app).get('/api/snowleopards/654321654321654321654321');
             expect(res).to.have.status(404);
         });
     });
 
-    // Тести для повного оновлення запису про зайця (PUT-запит)
+    // Тести для повного оновлення запису про Снігового Барса (PUT-запит)
     describe('PUT /api/snowleopards/:id', () => {
-        it('має повністю оновити запис про зайця', async () => {
-            // Створюємо тестового зайця
+        it('має повністю оновити запис про Снігового Барса', async () => {
+            // Створюємо тестового Снігового Барса
             const testSnowleopard = new Snowleopard({
                 name: 'Оригінальний',
                 age: 1,
@@ -179,7 +179,7 @@ describe('API вебдодатку сайту про Снігових Барсі
             });
             const savedSnowleopard = await testSnowleopard.save();
 
-            // Дані для оновлення зайця
+            // Дані для оновлення Снігового Барса
             const updatedData = {
                 name: 'Оновлений',
                 age: 2,
@@ -190,7 +190,7 @@ describe('API вебдодатку сайту про Снігових Барсі
                 huntingAltitude: '4 км',
             };
 
-            // Виконуємо PUT-запит для повного оновлення запису про зайця
+            // Виконуємо PUT-запит для повного оновлення запису про Снігового Барса
             const res = await chai
                 .request(app)
                 .put(`/api/snowleopards/${String(savedSnowleopard._id)}`)
@@ -210,7 +210,7 @@ describe('API вебдодатку сайту про Снігових Барсі
         });
 
         it("має завершитися невдачею при відсутності обов'язкових полів", async () => {
-            // Створюємо тестового зайця
+            // Створюємо тестового Снігового Барса
             const testSnowleopard = new Snowleopard({
                 name: 'Оригінальний',
                 age: 1,
@@ -241,7 +241,7 @@ describe('API вебдодатку сайту про Снігових Барсі
             // Перевіряємо, що запит завершився з помилкою
             expect(res).to.have.status(400);
 
-            // Перевіряємо, що заєць не змінився
+            // Перевіряємо, що Сніговий Барс не змінився
             const unchangedSnowleopard = await Snowleopard.findById(savedSnowleopard._id);
             expect(unchangedSnowleopard).to.have.property('name', 'Оригінальний');
             expect(unchangedSnowleopard).to.have.property('height', 25);
@@ -250,10 +250,10 @@ describe('API вебдодатку сайту про Снігових Барсі
         });
     });
 
-    // Тести для часткового оновлення запису про зайця (PATCH-запит)
+    // Тести для часткового оновлення запису про Снігового Барса (PATCH-запит)
     describe('PATCH /api/snowleopards/:id', () => {
-        it('має частково оновити запис про зайця', async () => {
-            // Створюємо тестового зайця
+        it('має частково оновити запис про Снігового Барса', async () => {
+            // Створюємо тестового Снігового Барса
             const testSnowleopard = new Snowleopard({
                 name: 'Оригінальний',
                 age: 1,
@@ -293,7 +293,7 @@ describe('API вебдодатку сайту про Снігових Барсі
         });
 
         it('демонструє різницю між PATCH і PUT з частковими оновленнями', async () => {
-            // Створюємо тестового зайця
+            // Створюємо тестового Снігового Барса
             const testSnowleopard = new Snowleopard({
                 name: 'Оригінальний',
                 age: 1,
@@ -360,17 +360,17 @@ describe('API вебдодатку сайту про Снігових Барсі
         });
     });
 
-    // Тести для видалення запису зайця (DELETE-запит)
+    // Тести для видалення запису Снігового Барса (DELETE-запит)
     describe('DELETE /api/snowleopards/:id', () => {
-        it('має видалити запис про зайця', async () => {
-            // Створюємо тестового зайця
+        it('має видалити запис про Снігового Барса', async () => {
+            // Створюємо тестового Снігового Барса
             const testSnowleopard = new Snowleopard({
-                name: 'Стрибунець',
+                name: 'Бігань',
                 age: 2,
                 height: 28,
                 weight: 2.1,
                 gender: 'female',
-                description: 'Чорний заєць',
+                description: 'Сніговий леопард',
                 huntingAltitude: '3 км',
             });
             const savedSnowleopard = await testSnowleopard.save();
@@ -380,9 +380,9 @@ describe('API вебдодатку сайту про Снігових Барсі
                 .request(app)
                 .delete(`/api/snowleopards/${String(savedSnowleopard._id)}`);
             expect(res).to.have.status(200);
-            expect(res.body).to.have.property('message', 'Запис про зайця видалено');
+            expect(res.body).to.have.property('message', 'Запис про Снігового Барса видалено');
 
-            // Перевіряємо, що запис про зайця дійсно видалено з бази
+            // Перевіряємо, що запис про Снігового Барса дійсно видалено з бази
             const findSnowleopard = await Snowleopard.findById(savedSnowleopard._id);
             expect(findSnowleopard).to.be.null;
         });

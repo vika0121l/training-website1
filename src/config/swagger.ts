@@ -4,9 +4,9 @@ export const swaggerSpec = {
     openapi: '3.0.0',
     // Загальна інформація про API
     info: {
-        title: 'API Сайту про Зайців',
+        title: 'API Сайту про Снігових Барсів',
         version: '1.0.0',
-        description: 'Документація API для Сайту про Зайців',
+        description: 'Документація API для Сайту про Снігових Барсів',
     },
     // Налаштування серверів для тестування API
     servers: [
@@ -21,12 +21,12 @@ export const swaggerSpec = {
     // Визначення роутерів API та операцій з ними
     paths: {
         '/api/snowleopards': {
-            // GET запит для отримання всіх зайців
+            // GET запит для отримання всіх Снігових Барсів
             get: {
-                summary: 'Отримати всіх зайців',
+                summary: 'Отримати всіх Снігових Барсів',
                 responses: {
                     '200': {
-                        description: 'Список всіх зайців',
+                        description: 'Список всіх Снігових Барсів',
                         content: {
                             'application/json': {
                                 schema: {
@@ -39,9 +39,9 @@ export const swaggerSpec = {
                 },
             },
 
-            // POST запит для створення нового зайця
+            // POST запит для створення нового Снігового Барса
             post: {
-                summary: 'Створити нового зайця',
+                summary: 'Створити нового Снігового Барса',
                 requestBody: {
                     required: true,
                     content: {
@@ -52,7 +52,7 @@ export const swaggerSpec = {
                 },
                 responses: {
                     '201': {
-                        description: "Створений об'єкт зайця",
+                        description: "Створений об'єкт Снігового Барса",
                         content: {
                             'application/json': {
                                 schema: { $ref: '#/components/schemas/Snowleopard' },
@@ -63,43 +63,43 @@ export const swaggerSpec = {
             },
         },
 
-        // Операції для конкретного зайця за ID
+        // Операції для конкретного Снігового Барса за ID
         '/api/snowleopards/{id}': {
-            // GET запит для отримання зайця за ID
+            // GET запит для отримання Снігового Барса за ID
             get: {
-                summary: 'Отримати зайця за ID',
+                summary: 'Отримати Снігового Барса за ID',
                 parameters: [
                     {
                         in: 'path',
                         name: 'id',
                         required: true,
                         schema: { type: 'string' },
-                        description: 'ID зайця',
+                        description: 'ID Снігового Барса',
                     },
                 ],
                 responses: {
                     '200': {
-                        description: "Об'єкт зайця",
+                        description: "Об'єкт Снігового Барса",
                         content: {
                             'application/json': {
                                 schema: { $ref: '#/components/schemas/Snowleopard' },
                             },
                         },
                     },
-                    '404': { description: 'Зайця не знайдено' },
+                    '404': { description: 'Снігового Барса не знайдено' },
                 },
             },
 
-            // PUT запит для повного оновлення зайця за ID
+            // PUT запит для повного оновлення Снігового Барса за ID
             put: {
-                summary: 'Повністю оновити зайця',
+                summary: 'Повністю оновити Снігового Барса',
                 parameters: [
                     {
                         in: 'path',
                         name: 'id',
                         required: true,
                         schema: { type: 'string' },
-                        description: 'ID зайця',
+                        description: 'ID Снігового Барса',
                     },
                 ],
                 requestBody: {
@@ -112,26 +112,26 @@ export const swaggerSpec = {
                 },
                 responses: {
                     '200': {
-                        description: "Оновлений об'єкт зайця",
+                        description: "Оновлений об'єкт Снігового Барса",
                         content: {
                             'application/json': {
                                 schema: { $ref: '#/components/schemas/Snowleopard' },
                             },
                         },
                     },
-                    '404': { description: 'Зайця не знайдено' },
+                    '404': { description: 'Снігового Барса не знайдено' },
                 },
             },
-            // PATCH запит для часткового оновлення зайця за ID
+            // PATCH запит для часткового оновлення Снігового Барса за ID
             patch: {
-                summary: 'Частково оновити зайця',
+                summary: 'Частково оновити Снігового Барса',
                 parameters: [
                     {
                         in: 'path',
                         name: 'id',
                         required: true,
                         schema: { type: 'string' },
-                        description: 'ID зайця',
+                        description: 'ID Снігового Барса',
                     },
                 ],
                 requestBody: {
@@ -144,31 +144,31 @@ export const swaggerSpec = {
                 },
                 responses: {
                     '200': {
-                        description: "Оновлений об'єкт зайця",
+                        description: "Оновлений об'єкт Снігового Барса",
                         content: {
                             'application/json': {
                                 schema: { $ref: '#/components/schemas/Snowleopard' },
                             },
                         },
                     },
-                    '404': { description: 'Зайця не знайдено' },
+                    '404': { description: 'Снігового Барса не знайдено' },
                 },
             },
-            // DELETE запит для видалення даних про зайця за ID
+            // DELETE запит для видалення даних про Снігового Барса за ID
             delete: {
-                summary: 'Видалити дані про зайця',
+                summary: 'Видалити дані про Снігового Барса',
                 parameters: [
                     {
                         in: 'path',
                         name: 'id',
                         required: true,
                         schema: { type: 'string' },
-                        description: 'ID зайця',
+                        description: 'ID Снігового Барса',
                     },
                 ],
                 responses: {
                     '200': { description: 'Повідомлення про успішне видалення' },
-                    '404': { description: 'Зайця не знайдено' },
+                    '404': { description: 'Снігового Барса не знайдено' },
                 },
             },
         },
@@ -178,35 +178,35 @@ export const swaggerSpec = {
     components: {
         // Схеми даних
         schemas: {
-            // Схема об'єкта Заєць
+            // Схема об'єкта Сніговий Барс
             Snowleopard: {
                 type: 'object',
                 required: ['name', 'age', 'height', 'weight', 'gender'],
                 properties: {
                     name: {
                         type: 'string',
-                        description: "Ім'я зайця",
+                        description: "Ім'я Снігового Барса",
                     },
                     age: {
                         type: 'number',
-                        description: 'Вік зайця у роках',
+                        description: 'Вік Снігового Барса у роках',
                     },
                     height: {
                         type: 'number',
-                        description: 'Висота зайця в сантиметрах',
+                        description: 'Висота Снігового Барса в сантиметрах',
                     },
                     weight: {
                         type: 'number',
-                        description: 'Вага зайця в кілограмах',
+                        description: 'Вага Снігового Барса в кілограмах',
                     },
                     gender: {
                         type: 'string',
                         enum: ['male', 'female'],
-                        description: 'Стать зайця',
+                        description: 'Стать Снігового Барса',
                     },
                     description: {
                         type: 'string',
-                        description: "Опис зайця (необов'язкове поле)",
+                        description: "Опис Снігового Барса (необов'язкове поле)",
                     },
                     huntingAltitude: {
                         type: 'string',

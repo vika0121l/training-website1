@@ -4,13 +4,13 @@ import { SnowleopardRepository } from '../repositories/SnowleopardRepository';
 
 // Створюємо новий роутер Express
 const router = Router();
-// Отримуємо екземпляр репозиторію зайців з контейнера інверсії залежностей
+// Отримуємо екземпляр репозиторію Снігових Барсів з контейнера інверсії залежностей
 const snowleopardRepository = container.get(SnowleopardRepository);
 
-// Роутер для HTTP метода GET / - отримання всіх записів зайців
+// Роутер для HTTP метода GET / - отримання всіх записів Снігових Барсів
 router.get('/', (async (_req: Request, res: Response) => {
     try {
-        // Отримуємо всі записи зайців з бази даних через репозиторій
+        // Отримуємо всі записи Снігових Барсів з бази даних через репозиторій
         const snowleopards = await snowleopardRepository.findAll();
         res.json(snowleopards);
     } catch (error) {
@@ -20,16 +20,16 @@ router.get('/', (async (_req: Request, res: Response) => {
     }
 }) as unknown as (req: Request, res: Response) => void);
 
-// Роутер для HTTP метода GET /:id - отримання запису одного зайця за ідентифікатором
+// Роутер для HTTP метода GET /:id - отримання запису одного Снігового Барса за ідентифікатором
 router.get('/:id', (async (req: Request, res: Response) => {
     try {
-        // Пошук зайця за ідентифікатором
+        // Пошук Снігового Барса за ідентифікатором
         const snowleopard = await snowleopardRepository.findById(req.params.id);
         if (snowleopard) {
             res.json(snowleopard);
         } else {
-            // Якщо заєць не знайдений, повертаємо 404 помилку
-            res.status(404).json({ message: 'Запис зайця не знайдено' });
+            // Якщо Сніговий Барс не знайдений, повертаємо 404 помилку
+            res.status(404).json({ message: 'Запис Снігового Барса не знайдено' });
         }
     } catch (error) {
         // Обробка помилки
@@ -38,12 +38,12 @@ router.get('/:id', (async (req: Request, res: Response) => {
     }
 }) as unknown as (req: Request, res: Response) => void);
 
-// Роутер для HTTP метода POST / - створення нового запису зайця
+// Роутер для HTTP метода POST / - створення нового запису Снігового Барса
 router.post('/', (async (req: Request, res: Response) => {
     try {
-        // Створюємо новий запис зайця з даних запиту
+        // Створюємо новий запис Снігового Барса з даних запиту
         const newSnowleopard = await snowleopardRepository.create(req.body);
-        // Повертаємо статус 201 (Created) і дані створеного зайця
+        // Повертаємо статус 201 (Created) і дані створеного Снігового Барса
         res.status(201).json(newSnowleopard);
     } catch (error) {
         // Обробка помилки
@@ -52,7 +52,7 @@ router.post('/', (async (req: Request, res: Response) => {
     }
 }) as unknown as (req: Request, res: Response) => void);
 
-// Роутер для HTTP метода PUT /:id - повне оновлення запису зайця
+// Роутер для HTTP метода PUT /:id - повне оновлення запису Снігового Барса
 router.put('/:id', (async (req: Request, res: Response) => {
     try {
         // Перевірка наявності всіх обов'язкових полів для PUT запиту
@@ -66,12 +66,12 @@ router.put('/:id', (async (req: Request, res: Response) => {
             });
         }
 
-        // Оновлюємо зайця з вказаним ID
+        // Оновлюємо Снігового Барса з вказаним ID
         const snowleopard = await snowleopardRepository.update(req.params.id, req.body);
         if (snowleopard) {
             return res.json(snowleopard);
         } else {
-            // Якщо заєць не знайдений, повертаємо 404 помилку
+            // Якщо Сніговий Барс не знайдений, повертаємо 404 помилку
             return res.status(404).json({ message: 'Запис зайця не знайдено' });
         }
     } catch (error) {
@@ -81,15 +81,15 @@ router.put('/:id', (async (req: Request, res: Response) => {
     }
 }) as unknown as (req: Request, res: Response) => void);
 
-// Роутер для HTTP метода PATCH /:id - часткове оновлення запису зайця
+// Роутер для HTTP метода PATCH /:id - часткове оновлення запису Снігового Барса
 router.patch('/:id', (async (req: Request, res: Response) => {
     try {
-        // Часткове оновлення запису зайця - передаються лише ті поля, які потрібно змінити
+        // Часткове оновлення запису Снігового Барса - передаються лише ті поля, які потрібно змінити
         const snowleopard = await snowleopardRepository.patch(req.params.id, req.body);
         if (snowleopard) {
             res.json(snowleopard);
         } else {
-            // Якщо заєць не знайдений, повертаємо 404 помилку
+            // Якщо Сніговий Барс не знайдений, повертаємо 404 помилку
             res.status(404).json({ message: 'Запис зайця не знайдено' });
         }
     } catch (error) {
@@ -99,17 +99,17 @@ router.patch('/:id', (async (req: Request, res: Response) => {
     }
 }) as unknown as (req: Request, res: Response) => void);
 
-// Роутер для HTTP метода DELETE /:id - видалення запису зайця
+// Роутер для HTTP метода DELETE /:id - видалення запису Снігового Барса
 router.delete('/:id', (async (req: Request, res: Response) => {
     try {
-        // Видаляємо дані про зайця за ID
+        // Видаляємо дані про Снігового Барсу за ID
         const snowleopard = await snowleopardRepository.delete(req.params.id);
         if (snowleopard) {
             // У разі успіху повертаємо повідомлення про видалення
-            res.json({ message: 'Запис про зайця видалено' });
+            res.json({ message: 'Запис про Снігового Барса видалено' });
         } else {
-            // Якщо заєць не знайдений, повертаємо 404 помилку
-            res.status(404).json({ message: 'Запис про зайця не знайдено' });
+            // Якщо Сніговий Барс не знайдений, повертаємо 404 помилку
+            res.status(404).json({ message: 'Запис про Снігового Барса не знайдено' });
         }
     } catch (error) {
         // Обробка помилки
