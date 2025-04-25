@@ -104,7 +104,7 @@ describe('API вебдодатку сайту про Снігових Барсі
         it('має отримати всіх Снігових Барсів', async () => {
             // Створюємо тестовий запис Снігового Барса
             const testSnowleopard = new Snowleopard({
-                name: 'Сніговий Леопард',
+                name: 'Сніговий Барс',
                 age: 3,
                 height: 35,
                 weight: 3.2,
@@ -119,7 +119,7 @@ describe('API вебдодатку сайту про Снігових Барсі
             expect(res).to.have.status(200);
             expect(res.body).to.be.an('array');
             expect(res.body.length).to.equal(1);
-            expect(res.body[0]).to.have.property('name', 'Сніговий леопард');
+            expect(res.body[0]).to.have.property('name', 'Сніговий Барс');
             expect(res.body[0]).to.have.property('gender', 'male');
             expect(res.body[0]).to.have.property('description', 'Білий Барс');
             expect(res.body[0]).to.have.property('dateAdded');
