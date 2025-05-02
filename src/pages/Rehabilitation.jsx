@@ -412,6 +412,21 @@ function Rehabilitation() {  // Стан для зберігання даних 
                       ></textarea>
                     </div>
                   </div>
+
+                  <div className="row mb-3">
+                    <label htmlFor="huntingAltitude" className="col-sm-3 col-form-label">Висота полювання</label>
+                    <div className="col-sm-9">
+                      <input 
+                        type="text" 
+                        className="form-control" 
+                        id="huntingAltitude" 
+                        name="huntingAltitude" 
+                        value={formData.weight} 
+                        onChange={handleInputChange}
+                        required
+                      />
+                    </div>
+                  </div>
                 </fieldset>
                 <footer className="d-flex justify-content-end">
                   <button type="button" className="btn btn-secondary me-2" onClick={() => setShowAddModal(false)}>
