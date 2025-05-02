@@ -5,34 +5,35 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import { API_BASE_URL } from '../config/api';
 import { Toast } from 'bootstrap';
 
-// Компонент для управління зайцями, які перебувають на реабілітації, через API
+// Компонент для управління Сніговими Барсами, які перебувають на реабілітації, через API
 function Rehabilitation() {  // Стан для зберігання даних та стану інтерфейсу
-  const [rabbits, setRabbits] = useState([]);
+  const [snowleopards, setSnowleopards] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [showAddModal, setShowAddModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false); // Стан для модального вікна видалення
-  const [rabbitToDelete, setRabbitToDelete] = useState(null); // Ідентифікатор зайця для видалення
-  const [currentRabbit, setCurrentRabbit] = useState(null);
+  const [snowleopardToDelete, setSnowleopardToDelete] = useState(null); // Ідентифікатор зайця для видалення
+  const [currentSnowleopard, setCurrentSnowleopard] = useState(null);
   const [toastMessage, setToastMessage] = useState({ text: '', type: 'success' });
   
   // Посилання до елемента спливаючих сповіщень toast
   const toastRef = useRef(null);
-  // Стан форми для додавання/редагування зайців
+  // Стан форми для додавання/редагування Снігових Барсів
   const [formData, setFormData] = useState({
     name: '',
     age: '',
     height: '',
     weight: '',
     gender: 'male',
-    description: ''
+    description: '',
+    huntingAltitude:''
   });
 
-  // При рендерингу компонента, отримуємо всіх зайців
+  // При рендерингу компонента, отримуємо всіх Снігових Барсів
   useEffect(() => {
-    document.title = 'Реабілітація зайців - Сайт про зайців';
-    fetchRabbits();
+    document.title = 'Реабілітація Снігових Барсів - Сайт про Снігових Барсів';
+    fetchSnowleopards();
   }, []);
 
   // Показуємо toast повідомлення, коли змінюється toastMessage
@@ -43,18 +44,18 @@ function Rehabilitation() {  // Стан для зберігання даних 
     }
   }, [toastMessage]);
   
-  // Отримуємо всіх зайців з API
-  const fetchRabbits = async () => {
+  // Отримуємо всіх Снігових Барсів з API
+  const fetchSnowleopards = async () => {
     try {
       setLoading(true);
       setError(null);
-      const response = await axios.get(`${API_BASE_URL}/rabbits`);
-      setRabbits(Array.isArray(response.data) ? response.data : []);
+      const response = await axios.get(`${API_BASE_URL}/snowleopards`);
+      setSnowleopards(Array.isArray(response.data) ? response.data : []);
 
     } catch (err) {
       setError(`Помилка завантаження даних: ${err.message}`);
-      console.error('Помилка при отриманні даних про зайців:', err);
-      setRabbits([]);
+      console.error('Помилка при отриманні даних про Снігових Барсів:', err);
+      setSnowleopards([]);
 
     } finally {
       setLoading(false);
@@ -77,7 +78,7 @@ function Rehabilitation() {  // Стан для зберігання даних 
     });
   };
 
-  // Відкриваємо модальне вікно для додавання нового зайця
+  // Відкриваємо модальне вікно для додавання нового Снігового Барса
   const handleShowAddModal = () => {
     setFormData({
       name: '',
@@ -85,67 +86,69 @@ function Rehabilitation() {  // Стан для зберігання даних 
       height: '',
       weight: '',
       gender: 'male',
-      description: ''
+      description: '',
+      huntingAltitude:''
     });
     setShowAddModal(true);
   };
 
-  // Відкриваємо модальне вікно для редагування зайця
-  const handleShowEditModal = (rabbit) => {
-    setCurrentRabbit(rabbit);
+  // Відкриваємо модальне вікно для редагування Снігового Барса
+  const handleShowEditModal = (snowleopard) => {
+    setCurrentSnowleopard(snowleopard);
     setFormData({
-      name: rabbit.name,
-      age: rabbit.age,
-      height: rabbit.height,
-      weight: rabbit.weight,
-      gender: rabbit.gender,
-      description: rabbit.description || ''
+      name: snowleopard.name,
+      age: snowleopard.age,
+      height: snowleopard.height,
+      weight: snowleopard.weight,
+      gender: snowleopard.gender,
+      description: snowleopard.description || '',
+      huntingAltitude: snowleopard.huntingAltitude
     });
     setShowEditModal(true);
   };
 
-  // Додаємо нового зайця
-  const handleAddRabbit = async (e) => {
+  // Додаємо нового Снігового Барса
+  const handleAddSnowleopard = async (e) => {
     e.preventDefault();
     
     try {
       setLoading(true);
-      const response = await axios.post(`${API_BASE_URL}/rabbits`, formData);
-      const newRabbit = response.data;
-      setRabbits([...rabbits, newRabbit]);
+      const response = await axios.post(`${API_BASE_URL}/snowleopards`, formData);
+      const newSnowleopard = response.data;
+      setSnowleopards([...snowleopards, newSnowleopard]);
       setShowAddModal(false);
-      setToastMessage({ text: `Зайця "${newRabbit.name}" успішно додано!`, type: 'success' });
+      setToastMessage({ text: `Снігового Барса "${newSnowleopard.name}" успішно додано!`, type: 'success' });
 
     } catch (err) {
       const errorMessage = err.response?.data?.message || err.message;
       setError(`Помилка при створенні: ${errorMessage}`);
       setToastMessage({ text: `Помилка при створенні: ${errorMessage}`, type: 'danger' });
-      console.error('Помилка при додаванні зайця:', err);
+      console.error('Помилка при додаванні Снігового Барса:', err);
 
     } finally {
       setLoading(false);
     }
   };
 
-  // Оновлюємо існуючого зайця
-  const handleUpdateRabbit = async (e) => {
+  // Оновлюємо існуючого Снігового Барса
+  const handleUpdateSnowleopard = async (e) => {
     e.preventDefault();
     
     try {
       setLoading(true);
-      const response = await axios.put(`${API_BASE_URL}/rabbits/${currentRabbit._id}`, formData);
-      const updatedRabbit = response.data;
-      setRabbits(rabbits.map(rabbit => 
-        rabbit._id === currentRabbit._id ? updatedRabbit : rabbit
+      const response = await axios.put(`${API_BASE_URL}/snowleopards/${currentSnowleopard._id}`, formData);
+      const updatedSnowleopard = response.data;
+      setSnowleopards(snowleopards.map(snowleopard => 
+        snowleopard._id === currentSnowleopard._id ? updatedSnowleopard : snowleopard
       ));
       setShowEditModal(false);
-      setToastMessage({ text: `Дані про зайця "${updatedRabbit.name}" оновлено!`, type: 'success' });
+      setToastMessage({ text: `Дані про Снігового Барса "${updatedSnowleopard.name}" оновлено!`, type: 'success' });
 
     } catch (err) {
       const errorMessage = err.response?.data?.message || err.message;
       setError(`Помилка при оновленні: ${errorMessage}`);
       setToastMessage({ text: `Помилка при оновленні: ${errorMessage}`, type: 'danger' });
-      console.error('Помилка при оновленні зайця:', err);
+      console.error('Помилка при оновленні Снігового Барса:', err);
       
     } finally {
       setLoading(false);
@@ -153,26 +156,26 @@ function Rehabilitation() {  // Стан для зберігання даних 
   };
    
   // Показуємо модальне вікно підтвердження видалення
-  const handleShowDeleteModal = (rabbit) => {
-    setRabbitToDelete(rabbit);
+  const handleShowDeleteModal = (snowleopard) => {
+    setSnowleopardToDelete(snowleopard);
     setShowDeleteModal(true);
   };
 
-  // Видаляємо зайця
-  const handleDeleteRabbit = async () => {
+  // Видаляємо Снігового Барса
+  const handleDeleteSnowleopard = async () => {
     try {
       setLoading(true);
-      await axios.delete(`${API_BASE_URL}/rabbits/${rabbitToDelete._id}`);
-      setRabbits(rabbits.filter(rabbit => rabbit._id !== rabbitToDelete._id));
-      setToastMessage({ text: `Зайця "${rabbitToDelete.name}" успішно видалено!`, type: 'success' });
+      await axios.delete(`${API_BASE_URL}/snowleopards/${snowleopardToDelete._id}`);
+      setSnowleopards(snowleopards.filter(snowleopard => snowleopard._id !== snowleopardToDelete._id));
+      setToastMessage({ text: `Снігового Барса "${snowleopardToDelete.name}" успішно видалено!`, type: 'success' });
       setShowDeleteModal(false); // Закриваємо модальне вікно
-      setRabbitToDelete(null); // Очищаємо дані зайця для видалення
+      setSnowleopardToDelete(null); // Очищаємо дані Снігового Барса для видалення
 
     } catch (err) {
       const errorMessage = err.response?.data?.message || err.message;
       setError(`Помилка при видаленні: ${errorMessage}`);
       setToastMessage({ text: `Помилка при видаленні: ${errorMessage}`, type: 'danger' });
-      console.error('Помилка при видаленні зайця:', err);
+      console.error('Помилка при видаленні Снігового Барса:', err);
 
     } finally {
       setLoading(false);
@@ -188,13 +191,13 @@ function Rehabilitation() {  // Стан для зберігання даних 
   return (
     <main className="container px-4 py-4">
       <header className="d-flex justify-content-between align-items-center mb-4">
-        <h1 className="h2 text-success">Реабілітація зайців</h1>
+        <h1 className="h2 text-success">Реабілітація Снігових Барсів</h1>
         <button 
           className="btn btn-success" 
           onClick={handleShowAddModal}
           disabled={loading}
         >
-          Додати зайця
+          Додати Снігового Барса
         </button>
       </header>
 
@@ -229,23 +232,23 @@ function Rehabilitation() {  // Стан для зберігання даних 
         </div>
       </div>
 
-      {/* Таблиця зайців */}
+      {/* Таблиця Снігових Барсів */}
       {loading && !error && (
         <div className="text-center my-5">
           <div className="spinner-border text-success" role="status">
             <span className="visually-hidden">Завантаження...</span>
           </div>
-          <p className="mt-2">Завантаження записів зайців...</p>
+          <p className="mt-2">Завантаження записів Снігових Барсів...</p>
         </div>
       )}
       
-      {!loading && rabbits.length === 0 && (
+      {!loading && snowleopards.length === 0 && (
         <section className="alert alert-info">
-          Немає доступних записів про зайців у реабілітації. Додайте першого зайця!
+          Немає доступних записів про Снігових Барсів у реабілітації. Додайте першого Снігового Барса!
         </section>
       )}
       
-      {!loading && rabbits.length > 0 && (
+      {!loading && snowleopards.length > 0 && (
         <section className="table-responsive">
           <table className="table table-striped table-bordered table-hover vertical-align-middle">
             <thead>
@@ -261,20 +264,20 @@ function Rehabilitation() {  // Стан для зберігання даних 
               </tr>
             </thead>
             <tbody>
-              {rabbits.map(rabbit => (
-                <tr key={rabbit._id}>
-                  <td>{rabbit.name}</td>
-                  <td>{rabbit.age}</td>
-                  <td>{rabbit.height}</td>
-                  <td>{rabbit.weight}</td>
-                  <td>{rabbit.gender === 'male' ? 'Самець' : 'Самиця'}</td>
-                  <td>{rabbit.description}</td>
-                  <td>{rabbit.dateAdded ? formatDate(rabbit.dateAdded) : 'Н/Д'}</td>
+              {snowleopards.map(snowleopard => (
+                <tr key={snowleopard._id}>
+                  <td>{snowleopard.name}</td>
+                  <td>{snowleopard.age}</td>
+                  <td>{snowleopard.height}</td>
+                  <td>{snowleopard.weight}</td>
+                  <td>{snowleopard.gender === 'male' ? 'Самець' : 'Самиця'}</td>
+                  <td>{snowleopard.description}</td>
+                  <td>{snowleopard.dateAdded ? formatDate(snowleopard.dateAdded) : 'Н/Д'}</td>
                   <td>
                     <button
                       type="button"
                       className="btn btn-outline-primary btn-sm me-2"
-                      onClick={() => handleShowEditModal(rabbit)}
+                      onClick={() => handleShowEditModal(snowleopard)}
                       disabled={loading}
                     >
                       Редагувати
@@ -282,7 +285,7 @@ function Rehabilitation() {  // Стан для зберігання даних 
                     <button
                       type="button"
                       className="btn btn-outline-danger btn-sm"
-                      onClick={() => handleShowDeleteModal(rabbit)}
+                      onClick={() => handleShowDeleteModal(snowleopard)}
                       disabled={loading}
                     >
                       Видалити
@@ -295,23 +298,23 @@ function Rehabilitation() {  // Стан для зберігання даних 
         </section>
       )}
 
-      {/* Модальне вікно для додавання нового зайця */}
+      {/* Модальне вікно для додавання нового Снігового Барса */}
       <div 
         className={`modal fade ${showAddModal ? 'show' : ''}`} 
-        id="addRabbitModal" 
+        id="addSnowleopardModal" 
         tabIndex="-1" 
-        aria-labelledby="addRabbitModalLabel" 
+        aria-labelledby="addSnowleopardModalLabel" 
         aria-hidden="true"
         style={{ display: showAddModal ? 'block' : 'none' }}
       >
         <div className="modal-dialog modal-dialog-centered">
           <div className="modal-content">
             <header className="modal-header">
-              <h2 className="modal-title h5" id="addRabbitModalLabel">Додати нового зайця</h2>
+              <h2 className="modal-title h5" id="addSnowleopardModalLabel">Додати нового Снігового Барса</h2>
               <button type="button" className="btn-close" onClick={() => setShowAddModal(false)} aria-label="Закрити"></button>
             </header>
             <div className="modal-body">
-              <form onSubmit={handleAddRabbit}>
+              <form onSubmit={handleAddSnowleopard}>
                 <fieldset>
                   <div className="row mb-3">
                     <label htmlFor="name" className="col-sm-3 col-form-label">Ім'я</label>
@@ -420,7 +423,7 @@ function Rehabilitation() {  // Стан для зберігання даних 
                         <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
                         Зачекайте...
                       </>
-                    ) : 'Додати зайця'}
+                    ) : 'Додати Снігового Барса'}
                   </button>
                 </footer>
               </form>
@@ -435,23 +438,23 @@ function Rehabilitation() {  // Стан для зберігання даних 
              onClick={() => setShowAddModal(false)}></div>
       )}
 
-      {/* Модальне вікно для редагування існуючого зайця */}
+      {/* Модальне вікно для редагування існуючого Снігового Барса */}
       <div 
         className={`modal fade ${showEditModal ? 'show' : ''}`} 
-        id="editRabbitModal" 
+        id="editSnowleopardModal" 
         tabIndex="-1" 
-        aria-labelledby="editRabbitModalLabel" 
+        aria-labelledby="editSnowleopardModalLabel" 
         aria-hidden="true"
         style={{ display: showEditModal ? 'block' : 'none' }}
       >
         <div className="modal-dialog modal-dialog-centered">
           <div className="modal-content">
             <header className="modal-header">
-              <h2 className="modal-title h5" id="editRabbitModalLabel">Редагувати зайця</h2>
+              <h2 className="modal-title h5" id="editSnowleopardModalLabel">Редагувати Снігового Барса</h2>
               <button type="button" className="btn-close" onClick={() => setShowEditModal(false)} aria-label="Закрити"></button>
             </header>
             <div className="modal-body">
-              <form onSubmit={handleUpdateRabbit}>
+              <form onSubmit={handleUpdateSnowleopard}>
                 <fieldset>
                   <div className="row mb-3">
                     <label htmlFor="edit-name" className="col-sm-3 col-form-label">Ім'я</label>
@@ -575,24 +578,24 @@ function Rehabilitation() {  // Стан для зберігання даних 
              onClick={() => setShowEditModal(false)}></div>
       )}
 
-      {/* Модальне вікно для підтвердження видалення зайця */}
+      {/* Модальне вікно для підтвердження видалення Снігового Барса */}
       <div 
         className={`modal fade ${showDeleteModal ? 'show' : ''}`} 
-        id="deleteRabbitModal" 
+        id="deleteSnowleopardModal" 
         tabIndex="-1" 
-        aria-labelledby="deleteRabbitModalLabel" 
+        aria-labelledby="deleteSnowleopardModalLabel" 
         aria-hidden="true"
         style={{ display: showDeleteModal ? 'block' : 'none' }}
       >
         <div className="modal-dialog modal-dialog-centered">
           <div className="modal-content">
             <header className="modal-header">
-              <h2 className="modal-title h5" id="deleteRabbitModalLabel">Підтвердження видалення</h2>
+              <h2 className="modal-title h5" id="deleteSnowleopardModalLabel">Підтвердження видалення</h2>
               <button type="button" className="btn-close" onClick={() => setShowDeleteModal(false)} aria-label="Закрити"></button>
             </header>
             <div className="modal-body">
-              {rabbitToDelete && (
-                <p>Ви впевнені, що хочете видалити зайця <strong>{rabbitToDelete.name}</strong>?</p>
+              {snowleopardToDelete && (
+                <p>Ви впевнені, що хочете видалити Снігового Барса <strong>{snowleopardToDelete.name}</strong>?</p>
               )}
             </div>
             <footer className="modal-footer">              
@@ -602,7 +605,7 @@ function Rehabilitation() {  // Стан для зберігання даних 
               <button 
                 type="button" 
                 className="btn btn-danger" 
-                onClick={handleDeleteRabbit}
+                onClick={handleDeleteSnowleopard}
                 disabled={loading}
               >
                 {loading ? (
