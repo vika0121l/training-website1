@@ -1,0 +1,51 @@
+import { Schema, model } from 'mongoose';
+
+// Інтерфейс для об'єкта "Сніговий Барс"
+interface ISnowleopard {
+    name: string; // Ім'я Снігового Барса
+    age: number; // Вік Снігового Барса у роках
+    height: number; // Висота Снігового Барса в сантиметрах
+    weight: number; // Вага Снігового Барса в кілограмах
+    gender: 'male' | 'female'; // Стать Снігового Барса: 'male' - самець, 'female' - самка
+    description?: string; // Опис Снігового Барса (необов'язкове поле)
+    dateAdded: Date; // Дата додавання запису до бази даних
+    huntingAltitude: string; //висота території полювання над рівнем моря, км.
+}
+
+// Схема MongoDB для моделі "Сніговий Барс"
+const snowleopardSchema = new Schema<ISnowleopard>({
+    name: {
+        type: String,
+        required: true, // Поле є обов'язковим
+    },
+    age: {
+        type: Number,
+        required: true, // Поле є обов'язковим
+    },
+    height: {
+        type: Number,
+        required: true, // Поле є обов'язковим
+    },
+    weight: {
+        type: Number,
+        required: true, // Поле є обов'язковим
+    },
+    gender: {
+        type: String,
+        required: true, // Поле є обов'язковим
+        enum: ['male', 'female'], // Допустимі значення: 'male' або 'female'
+    },
+    description: String, // Необов'язкове текстове поле
+    dateAdded: {
+        type: Date,
+        default: Date.now, // Значення за замовчуванням - поточна дата і час
+    },
+    huntingAltitude: {
+        type: String,
+        required: true, // Поле є обов'язковим
+    },
+});
+
+// Створення моделі Mongoose на основі схеми
+export const Snowleopard = model<ISnowleopard>('Snowleopard', snowleopardSchema);
+export type { ISnowleopard }; // Експортуємо інтерфейс для використання в інших файлах
