@@ -417,11 +417,11 @@ function Rehabilitation() {  // Стан для зберігання даних 
                     <label htmlFor="huntingAltitude" className="col-sm-3 col-form-label">Висота полювання</label>
                     <div className="col-sm-9">
                       <input 
-                        type="text" 
+                        type="string" 
                         className="form-control" 
                         id="huntingAltitude" 
                         name="huntingAltitude" 
-                        value={formData.weight} 
+                        value={formData.huntingAltitude} 
                         onChange={handleInputChange}
                         required
                       />
