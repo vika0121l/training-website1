@@ -259,6 +259,7 @@ function Rehabilitation() {  // Стан для зберігання даних 
                 <th>Вага (кг)</th>
                 <th>Стать</th>
                 <th>Опис</th>
+                <th>Висота полювання</th>
                 <th>Дата додавання</th>
                 <th>Дії</th>
               </tr>
@@ -272,6 +273,7 @@ function Rehabilitation() {  // Стан для зберігання даних 
                   <td>{snowleopard.weight}</td>
                   <td>{snowleopard.gender === 'male' ? 'Самець' : 'Самиця'}</td>
                   <td>{snowleopard.description}</td>
+                  <td>{snowleopard.huntingAltitude}</td>
                   <td>{snowleopard.dateAdded ? formatDate(snowleopard.dateAdded) : 'Н/Д'}</td>
                   <td>
                     <button
@@ -567,7 +569,21 @@ function Rehabilitation() {  // Стан для зберігання даних 
                       ></textarea>
                     </div>
                   </div>
-                </fieldset>                
+                 <div className="row mb-3">
+                    <label htmlFor="huntingAltitude" className="col-sm-3 col-form-label">Висота полювання</label>
+                    <div className="col-sm-9">
+                      <input 
+                        type="string" 
+                        className="form-control" 
+                        id="huntingAltitude" 
+                        name="huntingAltitude" 
+                        value={formData.huntingAltitude} 
+                        onChange={handleInputChange}
+                        required
+                      />
+                    </div>
+                  </div>
+                </fieldset>               
                 <footer className="d-flex justify-content-end">
                   <button type="button" className="btn btn-secondary me-2" onClick={() => setShowEditModal(false)}>
                     Скасувати
