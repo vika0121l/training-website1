@@ -15,7 +15,7 @@ function Rehabilitation() {  // Стан для зберігання даних 
   const [showDeleteModal, setShowDeleteModal] = useState(false); // Стан для модального вікна видалення
   const [snowleopardToDelete, setSnowleopardToDelete] = useState(null); // Ідентифікатор зайця для видалення
   const [currentSnowleopard, setCurrentSnowleopard] = useState(null);
-  const [toastMessage, setToastMessage] = useState({ text: '', type: 'success' });
+  const [toastMessage, setToastMessage] = useState({ text: '', type: 'primary' });
   
   // Посилання до елемента спливаючих сповіщень toast
   const toastRef = useRef(null);
@@ -117,7 +117,7 @@ function Rehabilitation() {  // Стан для зберігання даних 
       const newSnowleopard = response.data;
       setSnowleopards([...snowleopards, newSnowleopard]);
       setShowAddModal(false);
-      setToastMessage({ text: `Снігового Барса "${newSnowleopard.name}" успішно додано!`, type: 'success' });
+      setToastMessage({ text: `Снігового Барса "${newSnowleopard.name}" успішно додано!`, type: 'primary' });
 
     } catch (err) {
       const errorMessage = err.response?.data?.message || err.message;
@@ -142,7 +142,7 @@ function Rehabilitation() {  // Стан для зберігання даних 
         snowleopard._id === currentSnowleopard._id ? updatedSnowleopard : snowleopard
       ));
       setShowEditModal(false);
-      setToastMessage({ text: `Дані про Снігового Барса "${updatedSnowleopard.name}" оновлено!`, type: 'success' });
+      setToastMessage({ text: `Дані про Снігового Барса "${updatedSnowleopard.name}" оновлено!`, type: 'primary' });
 
     } catch (err) {
       const errorMessage = err.response?.data?.message || err.message;
@@ -167,7 +167,7 @@ function Rehabilitation() {  // Стан для зберігання даних 
       setLoading(true);
       await axios.delete(`${API_BASE_URL}/snowleopards/${snowleopardToDelete._id}`);
       setSnowleopards(snowleopards.filter(snowleopard => snowleopard._id !== snowleopardToDelete._id));
-      setToastMessage({ text: `Снігового Барса "${snowleopardToDelete.name}" успішно видалено!`, type: 'success' });
+      setToastMessage({ text: `Снігового Барса "${snowleopardToDelete.name}" успішно видалено!`, type: 'primary' });
       setShowDeleteModal(false); // Закриваємо модальне вікно
       setSnowleopardToDelete(null); // Очищаємо дані Снігового Барса для видалення
 
@@ -191,9 +191,9 @@ function Rehabilitation() {  // Стан для зберігання даних 
   return (
     <main className="container px-4 py-4">
       <header className="d-flex justify-content-between align-items-center mb-4">
-        <h1 className="h2 text-success">Реабілітація Снігових Барсів</h1>
+        <h1 className="h2 text-primary">Реабілітація Снігових Барсів</h1>
         <button 
-          className="btn btn-success" 
+          className="btn btn-primary" 
           onClick={handleShowAddModal}
           disabled={loading}
         >
@@ -235,7 +235,7 @@ function Rehabilitation() {  // Стан для зберігання даних 
       {/* Таблиця Снігових Барсів */}
       {loading && !error && (
         <div className="text-center my-5">
-          <div className="spinner-border text-success" role="status">
+          <div className="spinner-border text-primary" role="status">
             <span className="visually-hidden">Завантаження...</span>
           </div>
           <p className="mt-2">Завантаження записів Снігових Барсів...</p>
@@ -434,7 +434,7 @@ function Rehabilitation() {  // Стан для зберігання даних 
                   <button type="button" className="btn btn-secondary me-2" onClick={() => setShowAddModal(false)}>
                     Скасувати
                   </button>
-                  <button type="submit" className="btn btn-success" disabled={loading}>
+                  <button type="submit" className="btn btn-primary" disabled={loading}>
                     {loading ? (
                       <>
                         <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
